@@ -23,8 +23,14 @@ lineReader.on('line', function (line) {
 
 lineReader.on('close', function (){
 	outputString += outputFooterdata();
-	
-	console.log(outputString);
+
+	var fs = require('fs');
+	fs.writeFile(output, outputString, function(err) {
+		if(err) {
+			return console.log(err);
+		}
+	}); 
+	//console.log(outputString);
 });
 
 
