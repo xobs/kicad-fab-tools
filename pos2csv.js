@@ -35,17 +35,15 @@ lineReader.on('close', function() {
 
 function processLine(line) {
     if (line.lastIndexOf('#', 0) !== 0) {
-        while (line.indexOf("  ") > -1) {
-            line = line.replace("  ", " ");
-        }
-        return formatCSV(line.split(" ")) + "\r\n";
+        return formatCSV(line.split(/  +/)) + "\r\n";
     } else
         return '';
 }
 
+var columnRanges = {};
 function formatCSV(details) {
-    var xOffset = -17.007257;
-    var yOffset = 28.951274;
+    var xOffset = 0;
+    var yOffset = 0;
     var columnIndex = {
         Ref: 0,
         Val: 1,
@@ -56,6 +54,7 @@ function formatCSV(details) {
         Side: 6
     };
 
+    console.log("Details: " + JSON.stringify(details));
     details[columnIndex.PosX] = parseFloat(details[columnIndex.PosX]);
     details[columnIndex.PosY] = parseFloat(details[columnIndex.PosY]);
     details[columnIndex.Rot] = parseFloat(details[columnIndex.Rot]);
@@ -67,17 +66,17 @@ function formatCSV(details) {
     details[columnIndex.PosY] = Math.round(details[columnIndex.PosY] * 1000) / 1000;
 
     var result = "";
-    result += details[columnIndex.Ref] + ','; // Designator
-    result += details[columnIndex.Package] + ','; // Footprint
-    result += details[columnIndex.PosX] + 'mm,'; // Mid X
-    result += details[columnIndex.PosY] + 'mm,'; // Mid Y
-    result += details[columnIndex.PosX] + 'mm,'; // Ref X
-    result += details[columnIndex.PosY] + 'mm,'; // Ref Y
-    result += details[columnIndex.PosX] + 'mm,'; // Pad X
-    result += details[columnIndex.PosY] + 'mm,'; // Pad Y
-    result += details[columnIndex.Side] + ','; // Layer
-    result += details[columnIndex.Rot] + ','; // Rotation
-    result += details[columnIndex.Val] + ''; // Comment
+    result += '"' + details[columnIndex.Ref] + '",'; // Designator
+    result += '"' + details[columnIndex.Package] + '",'; // Footprint
+    result += '"' + details[columnIndex.PosX] + 'mm",'; // Mid X
+    result += '"' + details[columnIndex.PosY] + 'mm",'; // Mid Y
+    result += '"' + details[columnIndex.PosX] + 'mm",'; // Ref X
+    result += '"' + details[columnIndex.PosY] + 'mm",'; // Ref Y
+    result += '"' + details[columnIndex.PosX] + 'mm",'; // Pad X
+    result += '"' + details[columnIndex.PosY] + 'mm",'; // Pad Y
+    result += '"' + details[columnIndex.Side] + '",'; // Layer
+    result += '"' + details[columnIndex.Rot] + '",'; // Rotation
+    result += '"' + details[columnIndex.Val] + '"'; // Comment
 
     return result;
 }
