@@ -7,13 +7,7 @@ Utilities for fabricating boards with KiCAD.
 
 ## Creating a Pick-and-Place .csv File
 
-Create a .pos file from PCBNew.  File -> Fabrication Outputs -> Footprint Position (.pos) File.  Check One File Per Board.
-
-Then use node to convert the file into a csv file:
-
-```
-node pos2csv.js input.pos output.csv
-```
+Note: this is no longer necessary, as KiCad has the option to produce a "CSV"-formatted Position file now.
 
 ## Creating a BOM .csv file
 
@@ -24,3 +18,10 @@ In EESchema, go Tools -> Generate Bill of Materials.  Click "Add Plugin" and nav
 ```
 
 Then click "Generate".
+
+## Creating an assembly diagram
+
+Install reportlab module.
+
+Generate gerbers, including a CSV Pick-and-Place file.
+Figure out the drill offset
