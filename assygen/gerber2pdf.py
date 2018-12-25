@@ -842,7 +842,6 @@ class OvalAperture:
         y = gm.y - 0.5*height
         UpdateExtents(x, y, x+width, y+height)
         c.roundRect(x, y, width, height, radius, stroke=0, fill=1)
-        print("OvalAperature: ({}, {})".format(x, y))
         if self.hole == 'round':
             c.setFillColor(gm.curBgColor)
             c.circle(gm.x, gm.y, 0.5*self.holeDiam*gm.unit, stroke=0, fill=1)
