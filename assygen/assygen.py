@@ -118,6 +118,9 @@ class PickAndPlaceFileKicad(PickAndPlaceFile):
                 cx = (float(i[i_cx]) + float(xOffset)) * mm
                 cy = (float(i[i_cy]) - float(yOffset)) * mm
 
+                if "DNP" in i[i_desc]:
+                    print("Skipping component {} because it's DNP".format(i[i_desc]))
+                    continue
                 w = componentWidth * mm
                 h = componentHeight * mm
                 l = i[i_layer]
